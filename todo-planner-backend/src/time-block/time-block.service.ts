@@ -77,7 +77,7 @@ export class TimeBlockService {
       try {
         const updatedTimeBlock = await this.timeBlockModel.findOneAndUpdate(
           { _id: id },
-          { $set: { idx } },
+          { $set: { order: idx } },
           { new: true },
         );
         updatedTimeBlocks.push(updatedTimeBlock);

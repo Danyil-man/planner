@@ -6,7 +6,7 @@ import { AuthDto } from 'src/auth/dto/auth.dto';
 import { hash } from 'argon2';
 import { UserDto } from './dto/user.dto';
 import { TasksService } from 'src/tasks/tasks.service';
-import { startOfDay, subDays } from 'date-fns';
+import { addDays, startOfDay, subDays } from 'date-fns';
 
 @Injectable()
 export class UsersService {
@@ -60,15 +60,21 @@ export class UsersService {
 
     const todayStart = startOfDay(new Date());
     const weekStart = startOfDay(subDays(new Date(), 7));
+    const tomorrowStart = startOfDay(addDays(new Date(), 1));
 
     const todayTasks = await this.taskService.getUserTasks({
       user_id: id,
-      createdAt: { $gte: todayStart.toISOString() },
+      createdAt: {
+        $gte: todayStart.toISOString(),
+        $lt: tomorrowStart.toISOString(),
+      },
+      isCompleted: false,
     });
 
     const weekTasks = await this.taskService.getUserTasks({
       user_id: id,
-      createdAt: { $lte: weekStart.toISOString() },
+      createdAt: { $gte: weekStart.toISOString() },
+      isCompleted: false,
     });
 
     // eslint-disable-next-line @typescript-eslint/no-unused-vars

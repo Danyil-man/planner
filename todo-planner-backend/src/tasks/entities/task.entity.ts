@@ -4,7 +4,7 @@ import { TaskPriorities } from '../enum';
 
 export type TaskDocument = HydratedDocument<Task>;
 
-@Schema({ timestamps: true, versionKey: false })
+@Schema({ versionKey: false })
 export class Task {
   @Prop({ required: true })
   name: string;
@@ -17,6 +17,12 @@ export class Task {
 
   @Prop({ type: Types.ObjectId, ref: 'User' })
   user_id: Types.ObjectId;
+
+  @Prop({ type: Date })
+  createdAt: Date;
+
+  @Prop({ type: Date })
+  updatedAt: Date;
 }
 
 export const TaskSchema = SchemaFactory.createForClass(Task);

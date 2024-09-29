@@ -15,7 +15,13 @@ export function useTaskDnd() {
 		if (destinationColumnId === result.source.droppableId) return;
 
 		if (destinationColumnId === "completed") {
-			updateTask({ id: result.draggableId, data: { isCompleted: true } });
+			updateTask({
+				id: result.draggableId,
+				data: {
+					isCompleted: true,
+				},
+			});
+
 			return;
 		}
 

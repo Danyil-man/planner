@@ -12,5 +12,5 @@ export class CountQueryDto {
 
   @IsOptional()
   @IsString()
-  createdAt?: { $gte?: string; $lte?: string };
+  createdAt?: { $gte?: string; $lte?: string; $gt?: string; $lt?: string };
 }
