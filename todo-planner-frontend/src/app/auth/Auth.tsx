@@ -22,9 +22,7 @@ export function Auth() {
 	});
 
 	const [isLoginForm, setIsLoginForm] = useState(false);
-
 	const { push } = useRouter();
-
 	const { mutate } = useMutation({
 		mutationKey: ["auth"],
 		mutationFn: (data: IAuthForm) =>
